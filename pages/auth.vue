@@ -2,10 +2,10 @@
   <div class="card flex justify-center">
     <Toast />
 
-    <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="grid lg:grid-cols-2 gap-4 w-full">
+    <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="w-full">
       <div class="flex flex-col justify-center items-center gap-4">
-        <InputText name="password" type="text" placeholder="password" class="w-full sm:w-56" />
-        <Button type="submit" severity="secondary" label="Submit" class="w-full sm:w-56" />
+        <InputText name="password" type="text" placeholder="password" class="w-full" />
+        <Button type="submit" severity="secondary" label="Submit" class="w-full" />
       </div>
     </Form>
   </div>
