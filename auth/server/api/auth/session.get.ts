@@ -6,13 +6,13 @@ export default defineEventHandler(async (event) => {
   const headerToken = getHeaders(event).authorization?.substring('Bearer '.length)
   const cookieToken = getCookie(event, useRuntimeConfig().auth.cookieName)
 
-  if (!headerToken && !cookieToken) return { loggedIn: false } as SessionData
+  if (!headerToken && !cookieToken) return
 
   let tokenData: AuthTokenData
   try {
-    tokenData = jwt.verify(headerToken ?? cookieToken!, useRuntimeConfig().auth.jwtSecretKey) as AuthTokenData
+    tokenData = jwt.verify(headerToken ?? cookieToken ?? '', useRuntimeConfig().auth.jwtSecretKey) as AuthTokenData
   } catch (e) {
-    return { loggedIn: false } as SessionData
+    return
   }
 
   return { loggedIn: tokenData.password === crc32(useRuntimeConfig().auth.password).toString(16) } as SessionData
