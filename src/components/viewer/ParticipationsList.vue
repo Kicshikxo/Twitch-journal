@@ -14,7 +14,7 @@
       <div class="flex justify-between items-center w-full">
         <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
         <div class="flex items-center gap-4">
-          <Chip v-if="option.assessment" :label="assessments.find((assessment) => assessment.value === option.assessment)?.label" class="py-1" />
+          <Chip v-if="option.assessment" :label="assessments.find((assessment) => assessment.value === option.assessment)?.label" style="padding-top: 0.25rem; padding-bottom: 0.25rem" />
           <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
         </div>
       </div>
