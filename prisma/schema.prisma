@@ -24,10 +24,11 @@ model Channel {
 model Stream {
   id String @id @default(dbgenerated("gen_random_uuid()")) @map("stream_id") @db.Uuid
 
-  participations Participation[]
-
+  title     String  @map("title")
   channel   Channel @relation(fields: [channelId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   channelId String  @map("channel_id") @db.Uuid
+
+  participations Participation[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")

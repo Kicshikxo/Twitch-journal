@@ -1,5 +1,4 @@
 import readTokenData from '~/auth/server/utils/readTokenData'
-import { AuthRole } from '~/auth/types'
 import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
@@ -12,5 +11,12 @@ export default defineEventHandler(async (event) => {
         username: tokenData.username
       }
     },
+    include: {
+      stream: {
+        include: {
+          channel: true
+        }
+      }
+    }
   })
 })

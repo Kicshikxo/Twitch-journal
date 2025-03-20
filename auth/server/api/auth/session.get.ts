@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   if (!tokenData) return sendError(event, createError({ statusCode: 401 }))
 
-  if (tokenData.role === AuthRole.CHANNEL_ADMIN) {
+  if (tokenData.role === AuthRole.CHANNEL_ADMIN && tokenData.channel) {
     const channel = await prisma.channel.findFirst({
       where: { name: tokenData.channel },
       orderBy: { createdAt: 'desc' },
@@ -26,7 +26,6 @@ export default defineEventHandler(async (event) => {
     if (user)
       return {
         role: tokenData.role,
-        channel: tokenData.channel,
         username: tokenData.username,
       } as SessionData
   }

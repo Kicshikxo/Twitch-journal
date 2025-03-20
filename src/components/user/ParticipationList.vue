@@ -1,5 +1,12 @@
 <template>
-  <Listbox :options="participations ?? []" optionLabel="id" filter filter-placeholder="Participations" listStyle="max-height: 300px" />
+  <Listbox :options="participations ?? []" filter filter-placeholder="Участия" listStyle="max-height: 300px">
+    <template #option="{ option }">
+      <div class="flex justify-between w-full">
+        <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
+        <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
+      </div>
+    </template>
+  </Listbox>
 </template>
 
 <script setup lang="ts">

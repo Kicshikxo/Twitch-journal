@@ -6,12 +6,12 @@
           <Icon name="prime:user" />
         </template>
       </Chip>
-      <Button text @click="logout({ redirectTo: '/auth' })">Logout</Button>
+      <Button text @click="logout({ redirectTo: '/auth' })">Выйти</Button>
     </div>
 
     <div v-else class="flex justify-end gap-4">
       <NuxtLink to="/auth">
-        <Button text>Login</Button>
+        <Button text>Войти</Button>
       </NuxtLink>
     </div>
 

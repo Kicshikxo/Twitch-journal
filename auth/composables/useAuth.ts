@@ -40,7 +40,7 @@ const userLogin = async (options: LoginUserOptions): Promise<LoginResult> => {
   try {
     await $fetch('/api/auth/login-user', {
       method: 'POST',
-      body: { channel: options.channel, username: options.username } as LoginUserData,
+      body: { username: options.username } as LoginUserData,
     })
 
     await getSession()

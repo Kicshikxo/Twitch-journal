@@ -1,5 +1,6 @@
 import { definePreset } from '@primeuix/themes'
 import Aura from '@primeuix/themes/aura'
+import { ru } from 'primelocale/js/ru.js'
 
 export default defineNuxtConfig({
   app: {
@@ -20,6 +21,7 @@ export default defineNuxtConfig({
 
   primevue: {
     options: {
+      locale: ru,
       ripple: true,
       theme: {
         preset: definePreset(Aura, {

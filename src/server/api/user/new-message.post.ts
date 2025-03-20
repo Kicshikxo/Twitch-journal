@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
       createdAt: 'desc',
     },
   })
+  if (!latestStream) return sendError(event, createError({ statusCode: 400 }))
   const user = await prisma.user.upsert({
     where: {
       username,
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
     },
     update: {},
   })
-  if (!latestStream || !user) return sendError(event, createError({ statusCode: 400 }))
+  if (!user) return sendError(event, createError({ statusCode: 400 }))
 
   return await prisma.participation.upsert({
     where: {

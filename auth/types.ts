@@ -13,12 +13,10 @@ export interface LoginAdminData {
   password: string
 }
 export interface LoginUserOptions {
-  channel: string
   username: string
   redirectTo?: string
 }
 export interface LoginUserData {
-  channel: string
   username: string
 }
 export interface LoginResult {
@@ -36,14 +34,14 @@ export interface LogoutResult {
 
 export interface AuthTokenData {
   role: AuthRole
-  channel: string
+  channel: string | null
   username: string | null
   password: string | null
 }
 
 export interface SessionData {
   role: AuthRole
-  channel: string
+  channel: string | null
   username: string
 }
 export interface GetSessionResult {
