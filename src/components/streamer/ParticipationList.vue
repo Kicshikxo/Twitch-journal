@@ -1,5 +1,5 @@
 <template>
-  <Listbox :options="participations ?? []" optionLabel="user.username" filter filter-placeholder="Участники" listStyle="max-height: 300px" />
+  <Listbox :options="participations ?? []" optionLabel="viewer.username" filter filter-placeholder="Участники" listStyle="max-height: 300px" />
 </template>
 
 <script setup lang="ts">

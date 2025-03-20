@@ -1,22 +1,22 @@
 export enum AuthRole {
-  CHANNEL_ADMIN = 'admin',
-  CHANNEL_USER = 'user',
+  CHANNEL_STREAMER = 'streamer',
+  CHANNEL_VIEWER = 'viewer',
 }
 
-export interface LoginAdminOptions {
+export interface LoginStreamerOptions {
   channel: string
   password: string
   redirectTo?: string
 }
-export interface LoginAdminData {
+export interface LoginStreamerData {
   channel: string
   password: string
 }
-export interface LoginUserOptions {
+export interface LoginViewerOptions {
   username: string
   redirectTo?: string
 }
-export interface LoginUserData {
+export interface LoginViewerData {
   username: string
 }
 export interface LoginResult {

@@ -37,8 +37,8 @@ model Stream {
   @@map("streams")
 }
 
-model User {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
+model Viewer {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @map("viewer_id") @db.Uuid
 
   username String @unique @map("username")
 
@@ -47,14 +47,14 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  @@map("users")
+  @@map("viewers")
 }
 
 model Participation {
   id String @id @default(dbgenerated("gen_random_uuid()")) @map("participation_id") @db.Uuid
 
-  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId String @map("user_id") @db.Uuid
+  viewer   Viewer @relation(fields: [viewerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  viewerId String @map("user_id") @db.Uuid
 
   stream   Stream @relation(fields: [streamId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   streamId String @map("stream_id") @db.Uuid
@@ -64,7 +64,7 @@ model Participation {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  @@unique([userId, streamId])
+  @@unique([viewerId, streamId])
   @@map("participations")
 }
 

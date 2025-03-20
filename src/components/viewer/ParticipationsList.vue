@@ -12,7 +12,7 @@
 <script setup lang="ts">
 const { state } = useAuth()
 
-const { data: participations } = useFetch('/api/user/get-participations', {
-  query: { userId: state.data.value?.username },
+const { data: participations } = useFetch('/api/viewer/get-participations', {
+  query: { viewerId: state.data.value?.username },
 })
 </script>

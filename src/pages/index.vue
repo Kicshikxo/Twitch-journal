@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-1 flex-col items-center gap-4">
-    <div v-if="state.data.value?.role === AuthRole.CHANNEL_ADMIN" class="flex flex-col gap-4 w-full">
-      <AdminStreamList v-model="selectedStream" />
-      <AdminParticipationList :stream="selectedStream" />
+    <div v-if="state.data.value?.role === AuthRole.CHANNEL_STREAMER" class="flex flex-col gap-4 w-full">
+      <StreamerStreamsList v-model="selectedStream" />
+      <StreamerParticipationList :stream="selectedStream" />
     </div>
 
-    <div v-if="state.data.value?.role === AuthRole.CHANNEL_USER" class="w-full">
-      <UserParticipationsList />
+    <div v-if="state.data.value?.role === AuthRole.CHANNEL_VIEWER" class="w-full">
+      <ViewerParticipationsList />
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import type { Stream } from '@prisma/client'
 import { AuthRole } from '~/auth/types'
 
-const { state, logout } = useAuth()
+const { state } = useAuth()
 
 const selectedStream = ref<Stream>()
 </script>

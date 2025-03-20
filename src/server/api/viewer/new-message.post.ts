@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     select: { id: true }
   })
 
-  const user = await prisma.user.upsert({
+  const viewer = await prisma.viewer.upsert({
     where: { username },
     create: { username },
     update: {},
@@ -38,13 +38,13 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.participation.upsert({
     where: {
-      userId_streamId: {
-        userId: user.id,
+      viewerId_streamId: {
+        viewerId: viewer.id,
         streamId: currentStream.id,
       },
     },
     create: {
-      userId: user.id,
+      viewerId: viewer.id,
       streamId: currentStream.id,
     },
     update: {

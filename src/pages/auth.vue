@@ -9,7 +9,7 @@
       </TabList>
       <TabPanels>
         <TabPanel value="0" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" @submit="userSubmit" class="w-full">
+          <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" @submit="viewerSubmit" class="w-full">
             <div class="flex flex-col justify-center items-center gap-4">
               <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
               <Button type="submit" label="Войти" :loading="loading" class="w-full" />
@@ -17,7 +17,7 @@
           </Form>
         </TabPanel>
         <TabPanel value="1" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" @submit="adminSubmit" class="w-full">
+          <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" @submit="streamerSubmit" class="w-full">
             <div class="flex flex-col justify-center items-center gap-4">
               <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
               <InputText name="password" type="password" placeholder="Пароль" class="w-full" />
@@ -38,13 +38,13 @@ definePageMeta({
 })
 
 const toast = useToast()
-const { adminLogin, userLogin } = useAuth()
+const { loginAsStreamer, loginAsViewer } = useAuth()
 const loading = ref(false)
 
-const adminSubmit = async ({ values }) => {
+const streamerSubmit = async ({ values }) => {
   loading.value = true
 
-  const { error } = await adminLogin({
+  const { error } = await loginAsStreamer({
     channel: values.channel,
     password: values.password,
     redirectTo: useRoute().query.redirectTo ?? '/',
@@ -57,10 +57,10 @@ const adminSubmit = async ({ values }) => {
   loading.value = false
 }
 
-const userSubmit = async ({ values }) => {
+const viewerSubmit = async ({ values }) => {
   loading.value = true
 
-  const { error } = await userLogin({
+  const { error } = await loginAsViewer({
     username: values.username,
     redirectTo: useRoute().query.redirectTo ?? '/',
   })

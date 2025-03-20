@@ -1,4 +1,4 @@
-import type { GetSessionResult, SessionData, LoginAdminData, LoginResult, LogoutOptions, LogoutResult, LoginAdminOptions, LoginUserData, LoginUserOptions } from '~/auth/types'
+import type { GetSessionResult, SessionData, LoginStreamerData, LoginResult, LogoutOptions, LogoutResult, LoginStreamerOptions, LoginViewerData, LoginViewerOptions } from '~/auth/types'
 
 const useAuthState = () => {
   const data = useState<SessionData | null>('session:data', () => null)
@@ -7,13 +7,13 @@ const useAuthState = () => {
   return { data, status }
 }
 
-const adminLogin = async (options: LoginAdminOptions): Promise<LoginResult> => {
+const loginAsStreamer = async (options: LoginStreamerOptions): Promise<LoginResult> => {
   const router = useRouter()
 
   try {
-    await $fetch('/api/auth/login-admin', {
+    await $fetch('/api/auth/login-streamer', {
       method: 'POST',
-      body: { channel: options.channel, password: options.password } as LoginAdminData,
+      body: { channel: options.channel, password: options.password } as LoginStreamerData,
     })
 
     await getSession()
@@ -34,13 +34,13 @@ const adminLogin = async (options: LoginAdminOptions): Promise<LoginResult> => {
   }
 }
 
-const userLogin = async (options: LoginUserOptions): Promise<LoginResult> => {
+const loginAsViewer = async (options: LoginViewerOptions): Promise<LoginResult> => {
   const router = useRouter()
 
   try {
-    await $fetch('/api/auth/login-user', {
+    await $fetch('/api/auth/login-viewer', {
       method: 'POST',
-      body: { username: options.username } as LoginUserData,
+      body: { username: options.username } as LoginViewerData,
     })
 
     await getSession()
@@ -117,8 +117,8 @@ export default () => {
   const { data, status } = useAuthState()
 
   return {
-    adminLogin,
-    userLogin,
+    loginAsStreamer,
+    loginAsViewer,
     logout,
     getSession,
     state: {

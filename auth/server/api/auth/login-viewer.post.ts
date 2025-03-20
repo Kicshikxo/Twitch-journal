@@ -1,22 +1,22 @@
 import jwt from 'jsonwebtoken'
-import { AuthRole, type AuthTokenData, type LoginUserData } from '~/auth/types'
+import { AuthRole, type AuthTokenData, type LoginViewerData } from '~/auth/types'
 import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const loginData: LoginUserData = await readBody(event)
+  const loginData: LoginViewerData = await readBody(event)
 
   if (!loginData.username) {
     return sendError(event, createError({ statusCode: 400 }))
   }
 
-  const user = await prisma.user.findUnique({
+  const viewer = await prisma.viewer.findUnique({
     where: { username: loginData.username },
   })
-  if (user?.username) {
+  if (viewer?.username) {
     const token = jwt.sign(
       {
-        role: AuthRole.CHANNEL_USER,
-        username: user.username,
+        role: AuthRole.CHANNEL_VIEWER,
+        username: viewer.username,
       } as AuthTokenData,
       useRuntimeConfig().auth.jwtSecretKey,
     )

@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.participation.findMany({
     where: {
-      user: {
+      viewer: {
         username: tokenData.username
       }
     },
