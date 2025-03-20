@@ -4,7 +4,7 @@ export default defineNuxtConfig({
       title: 'Twitch журнал',
     },
 
-    pageTransition: { name: 'page-fade', mode: 'out-in' },
+    pageTransition: { name: 'transition-fade', mode: 'out-in' },
   },
 
   css: ['~/src/assets/css/main.css'],
