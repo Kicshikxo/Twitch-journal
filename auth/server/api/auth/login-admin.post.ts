@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     return sendError(event, createError({ statusCode: 400 }))
   }
 
-  const channel = await prisma.channel.findFirst({
+  const channel = await prisma.channel.findUnique({
     where: { name: loginData.channel },
   })
   if (channel?.password && (await compare(loginData.password, channel.password))) {

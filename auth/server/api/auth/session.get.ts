@@ -9,9 +9,8 @@ export default defineEventHandler(async (event) => {
   if (!tokenData) return sendError(event, createError({ statusCode: 401 }))
 
   if (tokenData.role === AuthRole.CHANNEL_ADMIN && tokenData.channel) {
-    const channel = await prisma.channel.findFirst({
+    const channel = await prisma.channel.findUnique({
       where: { name: tokenData.channel },
-      orderBy: { createdAt: 'desc' },
     })
     if (channel?.password && crc32(channel.password).toString(16) === tokenData.password)
       return {
@@ -22,7 +21,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (tokenData.role === AuthRole.CHANNEL_USER && tokenData.username) {
-    const user = await prisma.user.findFirst({ where: { username: tokenData.username } })
+    const user = await prisma.user.findUnique({ where: { username: tokenData.username } })
     if (user)
       return {
         role: tokenData.role,

@@ -22,7 +22,8 @@ model Channel {
 }
 
 model Stream {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @map("stream_id") @db.Uuid
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @map("stream_id") @db.Uuid
+  twitchId String @unique @map("twitch_id")
 
   title     String  @map("title")
   channel   Channel @relation(fields: [channelId], references: [id], onUpdate: Cascade, onDelete: Cascade)

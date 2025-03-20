@@ -6,7 +6,7 @@
     </div>
 
     <div v-if="state.data.value?.role === AuthRole.CHANNEL_USER" class="w-full">
-      <UserParticipationList />
+      <UserParticipationsList />
     </div>
   </div>
 </template>

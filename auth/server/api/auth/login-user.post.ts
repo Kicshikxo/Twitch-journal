@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     return sendError(event, createError({ statusCode: 400 }))
   }
 
-  const user = await prisma.user.findFirst({
+  const user = await prisma.user.findUnique({
     where: { username: loginData.username },
   })
   if (user?.username) {
