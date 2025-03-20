@@ -29,7 +29,7 @@ const adminLogin = async (options: LoginAdminOptions): Promise<LoginResult> => {
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.message ?? null,
+      error: error?.statusMessage ?? null,
     }
   }
 }
@@ -56,7 +56,7 @@ const userLogin = async (options: LoginUserOptions): Promise<LoginResult> => {
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.message ?? null,
+      error: error?.statusMessage ?? null,
     }
   }
 }
@@ -80,7 +80,7 @@ const logout = async (options?: LogoutOptions): Promise<LogoutResult> => {
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.message ?? null,
+      error: error?.statusMessage ?? null,
     }
   }
 }
@@ -100,10 +100,14 @@ const getSession = async (): Promise<GetSessionResult> => {
       error: null,
       data: data,
     }
-  } catch (erroe: any) {
+  } catch (error: any) {
+    if (error.statusCode === 401) {
+      sessionData.value = null
+    }
+
     return {
-      status: erroe?.statusCode ?? 500,
-      error: erroe?.message ?? null,
+      status: error?.statusCode ?? 500,
+      error: error?.statusMessage ?? null,
       data: null,
     }
   }

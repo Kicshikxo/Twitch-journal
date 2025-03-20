@@ -7,7 +7,7 @@
         <span>Admin login</span>
         <InputText name="channel" type="text" placeholder="channel" class="w-full" />
         <InputText name="password" type="password" placeholder="password" class="w-full" />
-        <Button type="submit" severity="secondary" label="Submit" class="w-full" />
+        <Button type="submit" label="Submit" class="w-full" />
       </div>
     </Form>
 
@@ -16,7 +16,7 @@
         <span>User login</span>
         <InputText name="channel" type="text" placeholder="channel" class="w-full" />
         <InputText name="username" type="text" placeholder="username" class="w-full" />
-        <Button type="submit" severity="secondary" label="Submit" class="w-full" />
+        <Button type="submit" label="Submit" class="w-full" />
       </div>
     </Form>
   </div>
