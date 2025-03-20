@@ -7,10 +7,6 @@ export default defineEventHandler(async (event) => {
   if (!tokenData || tokenData.role !== AuthRole.CHANNEL_STREAMER || !tokenData.channel) return sendError(event, createError({ statusCode: 401 }))
 
   return await prisma.stream.findMany({
-    where: {
-      channel: {
-        name: tokenData.channel,
-      }
-    },
+    where: { channel: { name: tokenData.channel } },
   })
 })

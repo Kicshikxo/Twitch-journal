@@ -10,9 +10,7 @@ export default defineEventHandler(async (event) => {
   if (!streamId) return sendError(event, createError({ statusCode: 400 }))
 
   const stream = await prisma.stream.findUnique({
-    where: {
-      id: streamId,
-    },
+    where: { id: streamId },
   })
   if (!stream) return sendError(event, createError({ statusCode: 400 }))
 

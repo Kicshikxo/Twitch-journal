@@ -54,7 +54,7 @@ model Participation {
   id String @id @default(dbgenerated("gen_random_uuid()")) @map("participation_id") @db.Uuid
 
   viewer   Viewer @relation(fields: [viewerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  viewerId String @map("user_id") @db.Uuid
+  viewerId String @map("viewer_id") @db.Uuid
 
   stream   Stream @relation(fields: [streamId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   streamId String @map("stream_id") @db.Uuid
@@ -69,9 +69,9 @@ model Participation {
 }
 
 enum Assessment {
-  A
-  B
-  C
-  D
-  E
+  EXCELLENT
+  GOOD
+  NEUTRAL
+  BAD
+  AWFUL
 }

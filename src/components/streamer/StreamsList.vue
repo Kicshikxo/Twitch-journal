@@ -1,7 +1,7 @@
 <template>
   <Listbox :model-value="modelValue" :options="streams ?? []" filter filter-placeholder="Стримы" @update:model-value="emits('update:modelValue', $event)">
     <template #option="{ option }">
-      <div class="flex justify-between w-full">
+      <div class="flex justify-between items-center w-full">
         <span>{{ option.title }}</span>
         <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
       </div>

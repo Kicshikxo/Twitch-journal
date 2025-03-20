@@ -2,7 +2,7 @@ import { prisma } from '~/prisma/client'
 import { getTwitchClient } from '~/twitch/server/utils/client';
 
 export default defineEventHandler(async (event) => {
-  const { channel: channelName, username } = await readBody(event)
+  const { channel: channelName, username }: { channel: string, username: string } = await readBody(event)
   if (!channelName || !username) return sendError(event, createError({ statusCode: 400 }))
 
   const channel = await prisma.channel.upsert({

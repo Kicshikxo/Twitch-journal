@@ -6,11 +6,7 @@ export default defineEventHandler(async (event) => {
   if (!tokenData || !tokenData.username) return sendError(event, createError({ statusCode: 401 }))
 
   return await prisma.participation.findMany({
-    where: {
-      viewer: {
-        username: tokenData.username
-      }
-    },
+    where: { viewer: { username: tokenData.username } },
     include: {
       stream: {
         include: {
