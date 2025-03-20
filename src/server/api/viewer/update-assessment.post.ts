@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     where: { id: viewerId },
   })
   if (!viewer) return sendError(event, createError({ statusCode: 400 }))
-  console.log(assessment)
+
   return await prisma.participation.update({
     where: {
       id: participation.id,

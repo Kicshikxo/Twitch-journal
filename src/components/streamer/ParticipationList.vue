@@ -53,7 +53,6 @@ const loadingParticipations = ref<string[]>([])
 
 const updateViewerAssessment = async (participationId: string, viewerId: string, assessment: Assessment) => {
   loadingParticipations.value.push(participationId)
-  console.log(assessment)
   try {
     await $fetch('/api/viewer/update-assessment', {
       method: 'post',
