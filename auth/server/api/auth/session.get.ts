@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
       return {
         role: tokenData.role,
         channel: tokenData.channel,
+        username: tokenData.channel,
       } as SessionData
   }
 
@@ -26,6 +27,7 @@ export default defineEventHandler(async (event) => {
       return {
         role: tokenData.role,
         channel: tokenData.channel,
+        username: tokenData.username,
       } as SessionData
   }
 })

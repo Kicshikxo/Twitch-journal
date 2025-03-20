@@ -1,0 +1,16 @@
+import readTokenData from '~/auth/server/utils/readTokenData'
+import { AuthRole } from '~/auth/types'
+import { prisma } from '~/prisma/client'
+
+export default defineEventHandler(async (event) => {
+  const tokenData = readTokenData(event)
+  if (!tokenData || tokenData.role !== AuthRole.CHANNEL_ADMIN) return sendError(event, createError({ statusCode: 401 }))
+
+  return await prisma.stream.findMany({
+    where: {
+      channel: {
+        name: tokenData.channel,
+      }
+    },
+  })
+})

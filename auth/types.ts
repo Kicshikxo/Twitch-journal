@@ -44,6 +44,7 @@ export interface AuthTokenData {
 export interface SessionData {
   role: AuthRole
   channel: string
+  username: string
 }
 export interface GetSessionResult {
   status: number

@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex justify-center gap-8">
+  <div class="flex flex-1 justify-center gap-4">
     <Toast />
 
     <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" @submit="adminSubmit" class="w-full max-w-[320px]">

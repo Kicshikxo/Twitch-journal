@@ -1,10 +1,7 @@
-import readTokenData from '~/auth/server/utils/readTokenData'
-import { AuthRole } from '~/auth/types'
 import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
   const { channel, username } = await readBody(event)
-
   if (!channel || !username) return sendError(event, createError({ statusCode: 400 }))
 
   const latestStream = await prisma.stream.findFirst({
@@ -17,7 +14,6 @@ export default defineEventHandler(async (event) => {
       createdAt: 'desc',
     },
   })
-
   const user = await prisma.user.upsert({
     where: {
       username,
@@ -27,7 +23,6 @@ export default defineEventHandler(async (event) => {
     },
     update: {},
   })
-
   if (!latestStream || !user) return sendError(event, createError({ statusCode: 400 }))
 
   return await prisma.participation.upsert({

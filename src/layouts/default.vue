@@ -1,8 +1,10 @@
 <template>
-  <div class="flex flex-col w-dvw h-dvh">
+  <div class="flex flex-col h-dvh">
     <AppHeader />
-    <main class="flex-1 p-8">
-      <slot />
+    <main class="relative flex flex-1 overflow-y-auto">
+      <section class="absolute flex p-8 w-full min-h-full">
+        <slot />
+      </section>
     </main>
   </div>
 </template>
