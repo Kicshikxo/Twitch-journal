@@ -1,5 +1,15 @@
 <template>
-  <Listbox :options="participations ?? []" filter filter-placeholder="Участники" listStyle="max-height: 300px">
+  <Listbox :options="participations ?? []" filter filter-placeholder="Поиск участника" listStyle="max-height: 250px">
+    <template #header>
+      <div class="flex justify-between items-center">
+        <span class="text-lg">Участники стрима</span>
+        <Button text :loading="loadingParticipationsStatus === 'pending'" @click="refreshParticipations()">
+          <template #icon>
+            <Icon name="prime:refresh" />
+          </template>
+        </Button>
+      </div>
+    </template>
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
         <span>{{ option.viewer.username }}</span>
@@ -23,7 +33,11 @@ const props = defineProps<{ stream?: Stream }>()
 
 const toast = useToast()
 
-const { data: participations } = useFetch('/api/stream/get-participations', {
+const {
+  data: participations,
+  refresh: refreshParticipations,
+  status: loadingParticipationsStatus,
+} = useFetch('/api/stream/get-participations', {
   query: { streamId: computed(() => props.stream?.id) },
   immediate: !!props.stream,
 })

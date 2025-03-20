@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.participation.findMany({
     where: { streamId: stream.id },
-    include: { viewer: true }
+    include: { viewer: true },
+    orderBy: { createdAt: 'desc' },
   })
 })

@@ -1,5 +1,15 @@
 <template>
-  <Listbox :options="participations ?? []" filter filter-placeholder="Участия" listStyle="max-height: 300px">
+  <Listbox :options="participations ?? []" filter filter-placeholder="Поиск стрима" listStyle="max-height: 300px">
+    <template #header>
+      <div class="flex justify-between items-center">
+        <span class="text-lg">Участия в стримах</span>
+        <Button text :loading="loadingParticipationsStatus === 'pending'" @click="refreshParticipations()">
+          <template #icon>
+            <Icon name="prime:refresh" />
+          </template>
+        </Button>
+      </div>
+    </template>
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
         <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
@@ -17,7 +27,11 @@ import type { Assessment } from '@prisma/client'
 
 const { state } = useAuth()
 
-const { data: participations } = useFetch('/api/viewer/get-participations', {
+const {
+  data: participations,
+  refresh: refreshParticipations,
+  status: loadingParticipationsStatus,
+} = useFetch('/api/viewer/get-participations', {
   query: { viewerId: state.data.value?.username },
 })
 

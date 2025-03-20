@@ -10,9 +10,10 @@ export default defineEventHandler(async (event) => {
     include: {
       stream: {
         include: {
-          channel: true
-        }
-      }
-    }
+          channel: true,
+        },
+      },
+    },
+    orderBy: { createdAt: 'desc' },
   })
 })

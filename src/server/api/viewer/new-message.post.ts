@@ -1,15 +1,15 @@
 import { prisma } from '~/prisma/client'
-import { getTwitchClient } from '~/twitch/server/utils/client';
+import { getTwitchClient } from '~/twitch/server/utils/client'
 
 export default defineEventHandler(async (event) => {
-  const { channel: channelName, username }: { channel: string, username: string } = await readBody(event)
+  const { channel: channelName, username }: { channel: string; username: string } = await readBody(event)
   if (!channelName || !username) return sendError(event, createError({ statusCode: 400 }))
 
   const channel = await prisma.channel.upsert({
     where: { name: channelName },
     create: { name: channelName },
     update: {},
-    select: { id: true }
+    select: { id: true },
   })
 
   const twitchClient = getTwitchClient()
@@ -26,14 +26,14 @@ export default defineEventHandler(async (event) => {
       channelId: channel.id,
     },
     update: {},
-    select: { id: true }
+    select: { id: true },
   })
 
   const viewer = await prisma.viewer.upsert({
     where: { username },
     create: { username },
     update: {},
-    select: { id: true }
+    select: { id: true },
   })
 
   return await prisma.participation.upsert({

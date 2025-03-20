@@ -7,12 +7,12 @@ export default defineEventHandler(async (event) => {
   const tokenData = readTokenData(event)
   if (!tokenData || tokenData.role !== AuthRole.CHANNEL_STREAMER) return sendError(event, createError({ statusCode: 401 }))
 
-  const { participationId, viewerId, assessment }: { participationId: string, viewerId: string, assessment: Assessment } = await readBody(event)
+  const { participationId, viewerId, assessment }: { participationId: string; viewerId: string; assessment: Assessment } = await readBody(event)
   if (!participationId) return sendError(event, createError({ statusCode: 400 }))
 
   const participation = await prisma.participation.findUnique({
     where: { id: participationId },
-    include: { stream: { include: { channel: true } } }
+    include: { stream: { include: { channel: true } } },
   })
   if (!participation || participation.stream.channel.name !== tokenData.channel) return sendError(event, createError({ statusCode: 400 }))
 
@@ -27,6 +27,6 @@ export default defineEventHandler(async (event) => {
     },
     data: {
       assessment: assessment,
-    }
+    },
   })
 })
