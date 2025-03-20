@@ -1,9 +1,7 @@
 export default defineNuxtConfig({
   vite: {
     resolve: {
-      alias: {
-        '.prisma/client/edge': './node_modules/.prisma/client/edge.js',
-      },
+      alias: { '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js' },
     },
   },
 })
