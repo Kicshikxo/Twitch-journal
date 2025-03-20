@@ -7,18 +7,27 @@
       </TabList>
       <TabPanels>
         <TabPanel value="0" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" @submit="viewerSubmit" class="w-full">
+          <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" :resolver="viewerResolver" @submit="viewerSubmit" class="w-full">
             <div class="flex flex-col justify-center items-center gap-4">
-              <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
+              <div class="flex flex-col gap-1 w-full">
+                <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
+                <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
+              </div>
               <Button type="submit" label="Войти" :loading="loading" class="w-full" />
             </div>
           </Form>
         </TabPanel>
         <TabPanel value="1" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" @submit="streamerSubmit" class="w-full">
+          <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" :resolver="streamerResolver" @submit="streamerSubmit" class="w-full">
             <div class="flex flex-col justify-center items-center gap-4">
-              <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
-              <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
+              <div class="flex flex-col gap-1 w-full">
+                <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
+                <Message v-if="$form.channel?.invalid" severity="error" size="small" variant="simple">{{ $form.channel.error.message }}</Message>
+              </div>
+              <div class="flex flex-col gap-1 w-full">
+                <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
+                <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
+              </div>
               <Button type="submit" label="Войти" :loading="loading" class="w-full" />
             </div>
           </Form>
@@ -29,22 +38,42 @@
 </template>
 
 <script setup>
+import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { useToast } from 'primevue/usetoast'
+import { z } from 'zod'
 
 definePageMeta({
   auth: false,
 })
 
-const toast = useToast()
 const { loginAsStreamer, loginAsViewer } = useAuth()
+const toast = useToast()
 const loading = ref(false)
 
-const streamerSubmit = async ({ values }) => {
+const viewerResolver = ref(
+  zodResolver(
+    z.object({
+      username: z.string().min(1, { message: 'Имя пользователя обязательно' }),
+    }),
+  ),
+)
+
+const streamerResolver = ref(
+  zodResolver(
+    z.object({
+      channel: z.string().min(1, { message: 'Канал обязателен' }),
+      password: z.string().min(1, { message: 'Пароль обязателен' }),
+    }),
+  ),
+)
+
+const viewerSubmit = async ({ valid, values }) => {
+  if (!valid) return
+
   loading.value = true
 
-  const { error } = await loginAsStreamer({
-    channel: values.channel,
-    password: values.password,
+  const { error } = await loginAsViewer({
+    username: values.username,
     redirectTo: useRoute().query.redirectTo ?? '/',
   })
 
@@ -55,11 +84,14 @@ const streamerSubmit = async ({ values }) => {
   loading.value = false
 }
 
-const viewerSubmit = async ({ values }) => {
+const streamerSubmit = async ({ valid, values }) => {
+  if (!valid) return
+
   loading.value = true
 
-  const { error } = await loginAsViewer({
-    username: values.username,
+  const { error } = await loginAsStreamer({
+    channel: values.channel,
+    password: values.password,
     redirectTo: useRoute().query.redirectTo ?? '/',
   })
 

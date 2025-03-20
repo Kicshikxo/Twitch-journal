@@ -10,3 +10,9 @@
     </main>
   </div>
 </template>
+
+<style>
+.p-toast-message-content {
+  align-items: center;
+}
+</style>

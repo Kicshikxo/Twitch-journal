@@ -10,16 +10,17 @@
         "@primeuix/themes": "1.0.0",
         "@primevue/forms": "4.3.2",
         "@prisma/client": "6.5.0",
-        "@twurple/api": "^7.2.1",
-        "@twurple/auth": "^7.2.1",
+        "@twurple/api": "7.2.1",
+        "@twurple/auth": "7.2.1",
         "bcrypt": "5.1.1",
         "crc": "4.3.2",
         "jsonwebtoken": "9.0.2",
         "nuxt": "3.16.1",
-        "primelocale": "^2.1.1",
+        "primelocale": "2.1.1",
         "primevue": "4.3.2",
         "vue": "3.5.13",
         "vue-router": "4.5.0",
+        "zod": "3.24.2",
       },
       "devDependencies": {
         "@iconify-json/prime": "1.2.2",
@@ -1534,6 +1535,8 @@
     "youch-core": ["youch-core@0.3.2", "", { "dependencies": { "@poppinss/exception": "^1.2.0", "error-stack-parser-es": "^1.0.5" } }, "sha512-fusrlIMLeRvTFYLUjJ9KzlGC3N+6MOPJ68HNj/yJv2nz7zq8t4HEviLms2gkdRPUS7F5rZ5n+pYx9r88m6IE1g=="],
 
     "zip-stream": ["zip-stream@6.0.1", "", { "dependencies": { "archiver-utils": "^5.0.0", "compress-commons": "^6.0.2", "readable-stream": "^4.0.0" } }, "sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA=="],
+
+    "zod": ["zod@3.24.2", "", {}, "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="],
 
     "@antfu/install-pkg/package-manager-detector": ["package-manager-detector@0.2.11", "", { "dependencies": { "quansync": "^0.2.7" } }, "sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ=="],
 
