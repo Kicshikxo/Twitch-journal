@@ -1,4 +1,4 @@
-import type { GetSessionResult, SessionData, LoginData, LoginResult, LogoutOptions, LogoutResult, LoginOptions } from '~/auth/types'
+import type { GetSessionResult, SessionData, LoginAdminData, LoginResult, LogoutOptions, LogoutResult, LoginAdminOptions, LoginUserData, LoginUserOptions } from '~/auth/types'
 
 const useAuthState = () => {
   const data = useState<SessionData | null>('session:data', () => null)
@@ -7,12 +7,32 @@ const useAuthState = () => {
   return { data, status }
 }
 
-const login = async (options: LoginOptions): Promise<LoginResult> => {
+const adminLogin = async (options: LoginAdminOptions): Promise<LoginResult> => {
   const router = useRouter()
 
-  const { error } = await useFetch('/api/auth/login', {
+  const { error } = await useFetch('/api/auth/login-admin', {
     method: 'POST',
-    body: { password: options.password } as LoginData
+    body: { channel: options.channel, password: options.password } as LoginAdminData,
+  })
+
+  await getSession()
+
+  if (options.redirectTo && !error.value) {
+    router.push(options.redirectTo)
+  }
+
+  return {
+    status: error.value?.data?.httpStatus ?? 200,
+    error: error.value?.message ?? null,
+  }
+}
+
+const userLogin = async (options: LoginUserOptions): Promise<LoginResult> => {
+  const router = useRouter()
+
+  const { error } = await useFetch('/api/auth/login-user', {
+    method: 'POST',
+    body: { channel: options.channel, username: options.username } as LoginUserData,
   })
 
   await getSession()
@@ -62,7 +82,8 @@ export default () => {
   const { data, status } = useAuthState()
 
   return {
-    login,
+    adminLogin,
+    userLogin,
     logout,
     getSession,
     state: {

@@ -7,12 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id   String   @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
-  type UserType @default(DEFAULT)
+model Channel {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @map("channel_id") @db.Uuid
 
-  username String  @map("username")
+  name     String  @unique @map("name")
   password String? @map("password") @db.Char(60)
+
+  streams Stream[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("channels")
+}
+
+model Stream {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @map("stream_id") @db.Uuid
+
+  participations Participation[]
+
+  channel   Channel @relation(fields: [channelId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  channelId String  @map("channel_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("streams")
+}
+
+model User {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
+
+  username String @unique @map("username")
+
+  participations Participation[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
@@ -20,7 +48,28 @@ model User {
   @@map("users")
 }
 
-enum UserType {
-  DEFAULT
-  GUEST
+model Participation {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @map("participation_id") @db.Uuid
+
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String @map("user_id") @db.Uuid
+
+  stream   Stream @relation(fields: [streamId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  streamId String @map("stream_id") @db.Uuid
+
+  assessment Assessment? @map("assessment")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@unique([userId, streamId])
+  @@map("participations")
+}
+
+enum Assessment {
+  A
+  B
+  C
+  D
+  E
 }

@@ -1,19 +1,31 @@
 import crc32 from 'crc/crc32'
-import type { AuthTokenData, SessionData } from '~/auth/types'
-import jwt from 'jsonwebtoken'
+import { AuthRole, type SessionData } from '~/auth/types'
+import readTokenData from '~/auth/server/utils/readTokenData'
+import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const headerToken = getHeaders(event).authorization?.substring('Bearer '.length)
-  const cookieToken = getCookie(event, useRuntimeConfig().auth.cookieName)
+  const tokenData = readTokenData(event)
 
-  if (!headerToken && !cookieToken) return
+  if (!tokenData) return sendError(event, createError({ statusCode: 401 }))
 
-  let tokenData: AuthTokenData
-  try {
-    tokenData = jwt.verify(headerToken ?? cookieToken ?? '', useRuntimeConfig().auth.jwtSecretKey) as AuthTokenData
-  } catch (e) {
-    return
+  if (tokenData.role === AuthRole.CHANNEL_ADMIN) {
+    const channel = await prisma.channel.findFirst({
+      where: { name: tokenData.channel },
+      orderBy: { createdAt: 'desc' },
+    })
+    if (channel?.password && crc32(channel.password).toString(16) === tokenData.password)
+      return {
+        role: tokenData.role,
+        channel: tokenData.channel,
+      } as SessionData
   }
 
-  return { loggedIn: tokenData.password === crc32(useRuntimeConfig().auth.password).toString(16) } as SessionData
+  if (tokenData.role === AuthRole.CHANNEL_USER && tokenData.username) {
+    const user = await prisma.user.findFirst({ where: { username: tokenData.username } })
+    if (user)
+      return {
+        role: tokenData.role,
+        channel: tokenData.channel,
+      } as SessionData
+  }
 })

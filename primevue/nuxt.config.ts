@@ -1,4 +1,4 @@
-import Aura from '@primeuix/themes/aura';
+import Aura from '@primeuix/themes/aura'
 
 export default defineNuxtConfig({
   app: {
@@ -9,23 +9,24 @@ export default defineNuxtConfig({
           href: '/fonts/Rubik-Regular.woff2',
           as: 'font',
           type: 'font/woff2',
-          crossorigin: 'anonymous'
-        }
-      ]
+          crossorigin: 'anonymous',
+        },
+      ],
     },
   },
 
-  modules: [
-    '@primevue/nuxt-module'
-  ],
+  modules: ['@primevue/nuxt-module'],
 
   primevue: {
     options: {
       ripple: true,
       theme: {
-        preset: Aura
-      }
-    }
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark-mode',
+        },
+      },
+    },
   },
 
   css: ['~/primevue/assets/css/rubik.fontface.css'],

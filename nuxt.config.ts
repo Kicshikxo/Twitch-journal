@@ -1,13 +1,6 @@
 export default defineNuxtConfig({
-  compatibilityDate: "2025-03-19",
-
+  compatibilityDate: '2025-03-20',
   devtools: { enabled: true },
 
-  app: {
-    pageTransition: { name: 'page-fade', mode: 'out-in' },
-  },
-
-  extends: ['./auth', './primevue', './prisma', './tailwind'],
-
-  css: ['~/assets/css/main.css']
+  extends: ['./auth', './color-mode', './icons', './primevue', './prisma', './src', './tailwind'],
 })
