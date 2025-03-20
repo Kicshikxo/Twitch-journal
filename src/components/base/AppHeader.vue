@@ -15,7 +15,7 @@
       </NuxtLink>
     </div>
 
-    <ThemeSwitch />
+    <ColorModeSwitch />
   </header>
 </template>
 
