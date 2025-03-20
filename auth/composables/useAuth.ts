@@ -10,71 +10,102 @@ const useAuthState = () => {
 const adminLogin = async (options: LoginAdminOptions): Promise<LoginResult> => {
   const router = useRouter()
 
-  const { error } = await useFetch('/api/auth/login-admin', {
-    method: 'POST',
-    body: { channel: options.channel, password: options.password } as LoginAdminData,
-  })
+  try {
+    await $fetch('/api/auth/login-admin', {
+      method: 'POST',
+      body: { channel: options.channel, password: options.password } as LoginAdminData,
+    })
 
-  await getSession()
+    await getSession()
 
-  if (options.redirectTo && !error.value) {
-    router.push(options.redirectTo)
-  }
+    if (options.redirectTo) {
+      router.push(options.redirectTo)
+    }
 
-  return {
-    status: error.value?.data?.httpStatus ?? 200,
-    error: error.value?.message ?? null,
+    return {
+      status: 200,
+      error: null,
+    }
+  } catch (error: any) {
+    return {
+      status: error?.statusCode ?? 500,
+      error: error?.message ?? null,
+    }
   }
 }
 
 const userLogin = async (options: LoginUserOptions): Promise<LoginResult> => {
   const router = useRouter()
 
-  const { error } = await useFetch('/api/auth/login-user', {
-    method: 'POST',
-    body: { channel: options.channel, username: options.username } as LoginUserData,
-  })
+  try {
+    await $fetch('/api/auth/login-user', {
+      method: 'POST',
+      body: { channel: options.channel, username: options.username } as LoginUserData,
+    })
 
-  await getSession()
+    await getSession()
 
-  if (options.redirectTo && !error.value) {
-    router.push(options.redirectTo)
-  }
+    if (options.redirectTo) {
+      router.push(options.redirectTo)
+    }
 
-  return {
-    status: error.value?.data?.httpStatus ?? 200,
-    error: error.value?.message ?? null,
+    return {
+      status: 200,
+      error: null,
+    }
+  } catch (error: any) {
+    return {
+      status: error?.statusCode ?? 500,
+      error: error?.message ?? null,
+    }
   }
 }
 
 const logout = async (options?: LogoutOptions): Promise<LogoutResult> => {
   const router = useRouter()
 
-  const { error } = await useFetch('/api/auth/logout')
+  try {
+    await $fetch('/api/auth/logout')
 
-  await getSession()
+    await getSession()
 
-  if (options?.redirectTo && !error.value) {
-    router.push(options.redirectTo)
-  }
+    if (options?.redirectTo) {
+      router.push(options.redirectTo)
+    }
 
-  return {
-    status: error.value?.data?.httpStatus ?? 200,
-    error: error.value?.message ?? null,
+    return {
+      status: 200,
+      error: null,
+    }
+  } catch (error: any) {
+    return {
+      status: error?.statusCode ?? 500,
+      error: error?.message ?? null,
+    }
   }
 }
 
 const getSession = async (): Promise<GetSessionResult> => {
   const { data: sessionData } = useAuthState()
 
-  const { data, error } = await useFetch('/api/auth/session')
+  try {
+    const data = await $fetch('/api/auth/session', {
+      headers: useRequestHeaders(['cookie']),
+    })
 
-  sessionData.value = data.value ?? null
+    sessionData.value = data
 
-  return {
-    status: error.value?.data?.httpStatus ?? 200,
-    error: error.value?.message ?? null,
-    data: data.value ?? null,
+    return {
+      status: 200,
+      error: null,
+      data: data,
+    }
+  } catch (erroe: any) {
+    return {
+      status: erroe?.statusCode ?? 500,
+      error: erroe?.message ?? null,
+      data: null,
+    }
   }
 }
 
