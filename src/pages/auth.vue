@@ -1,39 +1,43 @@
 <template>
   <div class="flex flex-1 justify-center items-start">
-    <Tabs value="0" class="w-full sm:w-[400px]">
-      <TabList>
-        <Tab value="0">Зритель</Tab>
-        <Tab value="1">Стример</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel value="0" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" :resolver="viewerResolver" @submit="viewerSubmit" class="w-full">
-            <div class="flex flex-col justify-center items-center gap-4">
-              <div class="flex flex-col gap-1 w-full">
-                <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
-                <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
-              </div>
-              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
-            </div>
-          </Form>
-        </TabPanel>
-        <TabPanel value="1" class="py-2">
-          <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" :resolver="streamerResolver" @submit="streamerSubmit" class="w-full">
-            <div class="flex flex-col justify-center items-center gap-4">
-              <div class="flex flex-col gap-1 w-full">
-                <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
-                <Message v-if="$form.channel?.invalid" severity="error" size="small" variant="simple">{{ $form.channel.error.message }}</Message>
-              </div>
-              <div class="flex flex-col gap-1 w-full">
-                <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
-                <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
-              </div>
-              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
-            </div>
-          </Form>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <Card>
+      <template #content>
+        <Tabs value="0" class="w-full sm:w-[400px] rounded-xl">
+          <TabList>
+            <Tab value="0" class="w-2/4">Зритель</Tab>
+            <Tab value="1" class="w-2/4">Стример</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel value="0" class="p-0 pt-4">
+              <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" :resolver="viewerResolver" @submit="viewerSubmit" class="w-full">
+                <div class="flex flex-col justify-center items-center gap-4">
+                  <div class="flex flex-col gap-1 w-full">
+                    <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
+                    <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
+                  </div>
+                  <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+                </div>
+              </Form>
+            </TabPanel>
+            <TabPanel value="1" class="p-0 pt-4">
+              <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" :resolver="streamerResolver" @submit="streamerSubmit" class="w-full">
+                <div class="flex flex-col justify-center items-center gap-4">
+                  <div class="flex flex-col gap-1 w-full">
+                    <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
+                    <Message v-if="$form.channel?.invalid" severity="error" size="small" variant="simple">{{ $form.channel.error.message }}</Message>
+                  </div>
+                  <div class="flex flex-col gap-1 w-full">
+                    <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
+                    <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
+                  </div>
+                  <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+                </div>
+              </Form>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </template>
+    </Card>
   </div>
 </template>
 

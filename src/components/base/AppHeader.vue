@@ -9,12 +9,6 @@
         </Chip>
         <Button text @click="logout({ redirectTo: '/auth' })">Выйти</Button>
       </div>
-
-      <div v-else class="flex justify-end gap-4">
-        <NuxtLink to="/auth">
-          <Button text>Войти</Button>
-        </NuxtLink>
-      </div>
     </transition>
 
     <ColorModeSwitch />
