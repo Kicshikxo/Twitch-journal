@@ -109,6 +109,8 @@ const viewerSubmit = async ({ valid, values }) => {
 const streamerSubmit = async ({ valid, values }) => {
   if (!valid) return
 
+  toast.add({ severity: 'info', summary: 'Попытка логина', life: 3000 })
+
   loading.value = true
 
   const { error } = await loginAsStreamer({
