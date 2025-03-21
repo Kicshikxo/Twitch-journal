@@ -116,9 +116,9 @@ const streamerSubmit = async ({ valid, values }) => {
     password: values.password,
     redirectTo: useRoute().query.redirectTo ?? '/',
   })
-
+  errorLabel.value = error ?? 'Нет ошибок'
+  console.log(error)
   if (error) {
-    errorLabel.value = error
     console.log(toast)
     console.log(toast.add({ severity: 'error', summary: error, life: 3000 }))
   }
