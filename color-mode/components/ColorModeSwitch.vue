@@ -1,7 +1,9 @@
 <template>
   <Button text @click="toggleColorMode">
     <template #icon>
-      <Icon :name="iconName" />
+      <ClientOnly>
+        <Icon :name="iconName" />
+      </ClientOnly>
     </template>
   </Button>
 </template>

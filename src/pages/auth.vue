@@ -2,40 +2,33 @@
   <div class="flex flex-1 justify-center items-start">
     <Card>
       <template #content>
-        <Tabs value="0" class="w-full sm:w-[400px] rounded-xl">
-          <TabList>
-            <Tab value="0" class="w-2/4">Зритель</Tab>
-            <Tab value="1" class="w-2/4">Стример</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel value="0" class="p-0 pt-4">
-              <Form v-slot="$form" :initialValues="{ channel: '', username: '' }" :resolver="viewerResolver" @submit="viewerSubmit" class="w-full">
-                <div class="flex flex-col justify-center items-center gap-4">
-                  <div class="flex flex-col gap-1 w-full">
-                    <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
-                    <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
-                  </div>
-                  <Button type="submit" label="Войти" :loading="loading" class="w-full" />
-                </div>
-              </Form>
-            </TabPanel>
-            <TabPanel value="1" class="p-0 pt-4">
-              <Form v-slot="$form" :initialValues="{ channel: '', password: '' }" :resolver="streamerResolver" @submit="streamerSubmit" class="w-full">
-                <div class="flex flex-col justify-center items-center gap-4">
-                  <div class="flex flex-col gap-1 w-full">
-                    <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
-                    <Message v-if="$form.channel?.invalid" severity="error" size="small" variant="simple">{{ $form.channel.error.message }}</Message>
-                  </div>
-                  <div class="flex flex-col gap-1 w-full">
-                    <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
-                    <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
-                  </div>
-                  <Button type="submit" label="Войти" :loading="loading" class="w-full" />
-                </div>
-              </Form>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <SelectButton v-model="selectedTab" :options="tabs" :allowEmpty="false" class="w-full" option-label="label" option-value="value" />
+
+        <div class="w-full sm:w-[400px] pt-4">
+          <Form v-if="selectedTab === 0" v-slot="$form" :initialValues="{ channel: '', username: '' }" :resolver="viewerResolver" @submit="viewerSubmit" class="w-full">
+            <div class="flex flex-col justify-center items-center gap-4">
+              <div class="flex flex-col gap-1 w-full">
+                <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
+                <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
+              </div>
+              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+            </div>
+          </Form>
+
+          <Form v-else-if="selectedTab === 1" v-slot="$form" :initialValues="{ channel: '', password: '' }" :resolver="streamerResolver" @submit="streamerSubmit" class="w-full">
+            <div class="flex flex-col justify-center items-center gap-4">
+              <div class="flex flex-col gap-1 w-full">
+                <InputText name="channel" type="text" placeholder="Канал" class="w-full" />
+                <Message v-if="$form.channel?.invalid" severity="error" size="small" variant="simple">{{ $form.channel.error.message }}</Message>
+              </div>
+              <div class="flex flex-col gap-1 w-full">
+                <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
+                <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
+              </div>
+              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+            </div>
+          </Form>
+        </div>
       </template>
     </Card>
   </div>
@@ -53,6 +46,11 @@ definePageMeta({
 const { loginAsStreamer, loginAsViewer } = useAuth()
 const toast = useToast()
 const loading = ref(false)
+const tabs = ref([
+  { label: 'Зритель', value: 0 },
+  { label: 'Стример', value: 1 },
+])
+const selectedTab = ref(0)
 
 const viewerResolver = ref(
   zodResolver(
@@ -106,3 +104,9 @@ const streamerSubmit = async ({ valid, values }) => {
   loading.value = false
 }
 </script>
+
+<style scoped>
+:deep(.p-togglebutton) {
+  flex: 1;
+}
+</style>
