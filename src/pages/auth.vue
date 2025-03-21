@@ -1,7 +1,5 @@
 <template>
   <div class="flex flex-1 justify-center items-start">
-    <Toast />
-
     <Card>
       <template #content>
         <SelectButton v-model="selectedTab" :options="tabs" :allowEmpty="false" class="w-full" option-label="label" option-value="value" />
@@ -118,7 +116,8 @@ const streamerSubmit = async ({ valid, values }) => {
   })
 
   if (error) {
-    toast.add({ severity: 'error', summary: error, life: 3000 })
+    console.log(toast)
+    console.log(toast.add({ severity: 'error', summary: error, life: 3000 }))
   }
 
   loading.value = false
