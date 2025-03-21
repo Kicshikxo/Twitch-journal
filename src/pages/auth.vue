@@ -1,5 +1,7 @@
 <template>
   <div class="flex flex-1 justify-center items-start">
+    <Toast />
+
     <Card>
       <template #content>
         <SelectButton v-model="selectedTab" :options="tabs" :allowEmpty="false" class="w-full" option-label="label" option-value="value" />
