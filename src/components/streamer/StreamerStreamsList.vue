@@ -16,7 +16,7 @@
           <span>{{ option.title }}</span>
         </Chip>
         <Chip class="h-[32px]">
-          <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
+          <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
         </Chip>
       </div>
     </template>

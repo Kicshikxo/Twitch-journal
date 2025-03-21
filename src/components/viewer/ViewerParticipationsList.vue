@@ -24,7 +24,7 @@
             <Icon name="prime:comments" class="text-lg" />
           </Chip>
           <Chip class="h-[32px]">
-            <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
+            <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
           </Chip>
         </div>
       </div>
