@@ -1,5 +1,5 @@
 <template>
-  <Listbox :options="participations ?? []" filter :filter-fields="['viewer.username']" filter-placeholder="Поиск участника" :virtualScrollerOptions="{ itemSize: 56 }">
+  <Listbox :options="participations ?? []" filter :filter-fields="['viewer.username']" filter-placeholder="Поиск участника" :highlightOnSelect="false" :virtualScrollerOptions="{ itemSize: 56 }">
     <template #header>
       <div class="flex justify-between items-center">
         <span class="text-lg">Участники стрима</span>

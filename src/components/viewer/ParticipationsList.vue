@@ -1,5 +1,5 @@
 <template>
-  <Listbox :options="participations ?? []" filter :filter-fields="['stream.channel.name', 'stream.title']" filter-placeholder="Поиск стрима">
+  <Listbox :options="participations ?? []" filter :filter-fields="['stream.channel.name', 'stream.title']" filter-placeholder="Поиск стрима" :highlightOnSelect="false">
     <template #header>
       <div class="flex justify-between items-center">
         <span class="text-lg">Участия в стримах</span>
