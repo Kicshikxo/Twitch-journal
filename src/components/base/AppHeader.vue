@@ -7,7 +7,11 @@
             <Icon name="prime:user" />
           </template>
         </Chip>
-        <Button text @click="logout({ redirectTo: '/auth' })">Выйти</Button>
+        <Button text label="Выйти" @click="logout({ redirectTo: '/auth' })">
+          <template #icon>
+            <Icon name="prime:sign-out" />
+          </template>
+        </Button>
       </div>
     </transition>
 

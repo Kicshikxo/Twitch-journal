@@ -11,7 +11,11 @@
                 <InputText name="username" type="text" placeholder="Имя пользователя" class="w-full" />
                 <Message v-if="$form.username?.invalid" severity="error" size="small" variant="simple">{{ $form.username.error.message }}</Message>
               </div>
-              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+              <Button type="submit" label="Войти" :loading="loading" class="w-full">
+                <template #icon>
+                  <Icon name="prime:sign-in" class="text-xl" />
+                </template>
+              </Button>
             </div>
           </Form>
 
@@ -25,7 +29,11 @@
                 <Password name="password" placeholder="Пароль" toggleMask :feedback="false" fluid class="w-full" />
                 <Message v-if="$form.password?.invalid" severity="error" size="small" variant="simple">{{ $form.password.error.message }}</Message>
               </div>
-              <Button type="submit" label="Войти" :loading="loading" class="w-full" />
+              <Button type="submit" label="Войти" :loading="loading" class="w-full">
+                <template #icon>
+                  <Icon name="prime:sign-in" class="text-xl" />
+                </template>
+              </Button>
             </div>
           </Form>
         </div>

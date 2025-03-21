@@ -13,14 +13,20 @@
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
         <span>{{ option.viewer.username }}</span>
-        <Select
-          :model-value="assessments.find((assessment) => assessment.value === option.assessment)"
-          :options="assessments"
-          optionLabel="label"
-          placeholder="Оценка"
-          :loading="loadingParticipations.includes(option.id)"
-          @value-change="updateViewerAssessment(option.id, option.viewer.id, $event.value)"
-        />
+        <div class="flex items-center gap-4">
+          <Chip>
+            <span>{{ option.messagesCount }}</span>
+            <Icon name="prime:comments" class="text-lg" />
+          </Chip>
+          <Select
+            :model-value="assessments.find((assessment) => assessment.value === option.assessment)"
+            :options="assessments"
+            optionLabel="label"
+            placeholder="Оценка"
+            :loading="loadingParticipations.includes(option.id)"
+            @value-change="updateViewerAssessment(option.id, option.viewer.id, $event.value)"
+          />
+        </div>
       </div>
     </template>
   </Listbox>
