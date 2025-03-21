@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
     create: {
       viewerId: viewer.id,
       streamId: currentStream.id,
+      messagesCount: 1,
     },
     update: {
       messagesCount: { increment: 1 },
