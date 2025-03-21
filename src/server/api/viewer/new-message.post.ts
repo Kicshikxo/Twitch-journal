@@ -48,6 +48,7 @@ export default defineEventHandler(async (event) => {
       streamId: currentStream.id,
     },
     update: {
+      messagesCount: { increment: 1 },
       updatedAt: new Date(),
     },
   })

@@ -59,6 +59,8 @@ model Participation {
   stream   Stream @relation(fields: [streamId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   streamId String @map("stream_id") @db.Uuid
 
+  messagesCount Int @default(1) @map("messages_count")
+
   assessment Assessment? @map("assessment")
 
   createdAt DateTime @default(now()) @map("created_at")
