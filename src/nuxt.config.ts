@@ -7,5 +7,5 @@ export default defineNuxtConfig({
     pageTransition: { name: 'transition-fade', mode: 'out-in' },
   },
 
-  css: ['~/src/assets/css/main.css'],
+  css: ['~/src/assets/css/main.css', '~/src/assets/css/rubik.fontface.css'],
 })

@@ -4,10 +4,10 @@ import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
   const loginData: LoginViewerData = await readBody(event)
-
   if (!loginData.username) {
     return sendError(event, createError({ statusCode: 400 }))
   }
+  loginData.username = loginData.username.toLowerCase()
 
   const viewer = await prisma.viewer.findUnique({
     where: { username: loginData.username },

@@ -9,7 +9,7 @@ export const getTwitchClient = () => {
     const accessToken = useRuntimeConfig().twitch.accessToken
 
     if (!clientId || !accessToken) {
-      console.error('TWITCH_CLIENT_ID and TWITCH_CLIENT_SECRET not defined in .env')
+      console.error('TWITCH_CLIENT_ID and TWITCH_CLIENT_SECRET not defined in runtime environment')
       return
     }
 

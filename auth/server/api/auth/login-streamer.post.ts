@@ -6,10 +6,10 @@ import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
   const loginData: LoginStreamerData = await readBody(event)
-
   if (!loginData.channel || !loginData.password) {
     return sendError(event, createError({ statusCode: 400 }))
   }
+  loginData.channel = loginData.channel.toLowerCase()
 
   const channel = await prisma.channel.findUnique({
     where: { name: loginData.channel },

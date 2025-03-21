@@ -47,6 +47,4 @@ export default defineNuxtConfig({
       },
     },
   },
-
-  css: ['~/primevue/assets/css/rubik.fontface.css'],
 })

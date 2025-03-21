@@ -5,7 +5,6 @@ import { prisma } from '~/prisma/client'
 
 export default defineEventHandler(async (event) => {
   const tokenData = readTokenData(event)
-
   if (!tokenData) return sendError(event, createError({ statusCode: 401 }))
 
   if (tokenData.role === AuthRole.CHANNEL_STREAMER && tokenData.channel) {
