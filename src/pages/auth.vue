@@ -2,6 +2,7 @@
   <div class="flex flex-1 justify-center items-start">
     <Card>
       <template #content>
+        {{ errorLabel }}
         <SelectButton v-model="selectedTab" :options="tabs" :allowEmpty="false" class="w-full" option-label="label" option-value="value" />
 
         <div class="w-full sm:w-[400px] pt-4">
@@ -69,6 +70,7 @@ const tabs = ref([
   { label: 'Стример', value: 1 },
 ])
 const selectedTab = ref(0)
+const errorLabel = ref('')
 
 const viewerResolver = ref(
   zodResolver(
@@ -116,6 +118,7 @@ const streamerSubmit = async ({ valid, values }) => {
   })
 
   if (error) {
+    errorLabel.value = error
     console.log(toast)
     console.log(toast.add({ severity: 'error', summary: error, life: 3000 }))
   }
