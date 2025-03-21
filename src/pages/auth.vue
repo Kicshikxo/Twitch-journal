@@ -52,7 +52,8 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { FormSubmitEvent } from '@primevue/forms/form'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { useToast } from 'primevue/usetoast'
 import { z } from 'zod'
@@ -87,14 +88,14 @@ const streamerResolver = ref(
   ),
 )
 
-const viewerSubmit = async ({ valid, values }) => {
+const viewerSubmit = async ({ valid, values }: FormSubmitEvent) => {
   if (!valid) return
 
   loading.value = true
 
   const { error } = await loginAsViewer({
     username: values.username,
-    redirectTo: useRoute().query.redirectTo ?? '/',
+    redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
   if (error) {
@@ -104,7 +105,7 @@ const viewerSubmit = async ({ valid, values }) => {
   loading.value = false
 }
 
-const streamerSubmit = async ({ valid, values }) => {
+const streamerSubmit = async ({ valid, values }: FormSubmitEvent) => {
   if (!valid) return
 
   loading.value = true
@@ -112,7 +113,7 @@ const streamerSubmit = async ({ valid, values }) => {
   const { error } = await loginAsStreamer({
     channel: values.channel,
     password: values.password,
-    redirectTo: useRoute().query.redirectTo ?? '/',
+    redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
   if (error) {
