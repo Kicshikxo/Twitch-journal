@@ -12,17 +12,20 @@
     </template>
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
-        <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
-        <div class="flex items-center gap-4">
-          <Chip>
+        <Chip>
+          <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
+        </Chip>
+        <div class="flex items-center gap-2">
+          <Chip v-if="option.assessment" class="h-[32px]">
+            <Rating :model-value="assessments.indexOf(option.assessment) + 1" readonly />
+          </Chip>
+          <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>
             <Icon name="prime:comments" class="text-lg" />
           </Chip>
-          <Chip v-if="option.assessment">
-            <span>{{ assessments.find((assessment) => assessment.value === option.assessment)?.label }}</span>
-            <Icon name="prime:star" class="text-lg" />
+          <Chip class="h-[32px]">
+            <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
           </Chip>
-          <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
         </div>
       </div>
     </template>
@@ -30,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Assessment } from '@prisma/client'
+import { Assessment } from '@prisma/client'
 
 const { state } = useAuth()
 
@@ -42,11 +45,5 @@ const {
   query: { viewerId: state.data.value?.username },
 })
 
-const assessments = ref<{ label: string; value: Assessment }[]>([
-  { label: 'Отлично', value: 'EXCELLENT' },
-  { label: 'Хорошо', value: 'GOOD' },
-  { label: 'Нейтрально', value: 'NEUTRAL' },
-  { label: 'Плохо', value: 'BAD' },
-  { label: 'Ужасно', value: 'AWFUL' },
-])
+const assessments = ref<Assessment[]>([Assessment.AWFUL, Assessment.BAD, Assessment.NEUTRAL, Assessment.GOOD, Assessment.EXCELLENT])
 </script>

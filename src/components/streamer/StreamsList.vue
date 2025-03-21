@@ -12,8 +12,12 @@
     </template>
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
-        <span>{{ option.title }}</span>
-        <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
+        <Chip>
+          <span>{{ option.title }}</span>
+        </Chip>
+        <Chip class="h-[32px]">
+          <span>{{ new Date(option.createdAt).toLocaleString() }}</span>
+        </Chip>
       </div>
     </template>
   </Listbox>

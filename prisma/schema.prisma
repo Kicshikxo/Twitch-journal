@@ -59,8 +59,8 @@ model Participation {
   stream   Stream @relation(fields: [streamId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   streamId String @map("stream_id") @db.Uuid
 
-  messagesCount Int         @default(0) @map("messages_count")
-  assessment    Assessment? @map("assessment")
+  messagesCount Int        @default(0) @map("messages_count")
+  assessment    Assessment @default(NONE) @map("assessment")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
@@ -70,9 +70,10 @@ model Participation {
 }
 
 enum Assessment {
-  EXCELLENT
-  GOOD
-  NEUTRAL
-  BAD
+  NONE
   AWFUL
+  BAD
+  NEUTRAL
+  GOOD
+  EXCELLENT
 }

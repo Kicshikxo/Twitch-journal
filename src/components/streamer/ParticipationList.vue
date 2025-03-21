@@ -12,20 +12,17 @@
     </template>
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
-        <span>{{ option.viewer.username }}</span>
-        <div class="flex items-center gap-4">
-          <Chip>
+        <Chip>
+          <span>{{ option.viewer.username }}</span>
+        </Chip>
+        <div class="flex items-center gap-2">
+          <Chip class="h-[32px]">
+            <Rating :model-value="assessments.indexOf(option.assessment) + 1" :disabled="loadingParticipations.includes(option.id)" @value-change="updateViewerAssessment(option.id, option.viewer.id, assessments[$event - 1])" />
+          </Chip>
+          <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>
             <Icon name="prime:comments" class="text-lg" />
           </Chip>
-          <Select
-            :model-value="assessments.find((assessment) => assessment.value === option.assessment)"
-            :options="assessments"
-            optionLabel="label"
-            placeholder="Оценка"
-            :loading="loadingParticipations.includes(option.id)"
-            @value-change="updateViewerAssessment(option.id, option.viewer.id, $event.value)"
-          />
         </div>
       </div>
     </template>
@@ -48,21 +45,15 @@ const {
   immediate: !!props.stream,
 })
 
-const assessments = ref<{ label: string; value: Assessment }[]>([
-  { label: 'Отлично', value: 'EXCELLENT' },
-  { label: 'Хорошо', value: 'GOOD' },
-  { label: 'Нейтрально', value: 'NEUTRAL' },
-  { label: 'Плохо', value: 'BAD' },
-  { label: 'Ужасно', value: 'AWFUL' },
-])
+const assessments = ref<Assessment[]>([Assessment.AWFUL, Assessment.BAD, Assessment.NEUTRAL, Assessment.GOOD, Assessment.EXCELLENT])
 const loadingParticipations = ref<string[]>([])
 
-const updateViewerAssessment = async (participationId: string, viewerId: string, assessment: Assessment) => {
+const updateViewerAssessment = async (participationId: string, viewerId: string, assessment?: Assessment) => {
   loadingParticipations.value.push(participationId)
   try {
     await $fetch('/api/viewer/update-assessment', {
       method: 'post',
-      body: { participationId, viewerId, assessment },
+      body: { participationId, viewerId, assessment: assessment ?? 'NONE' },
     })
   } catch (error: any) {
     toast.add({ severity: 'error', summary: error.statusMessage, life: 3000 })
