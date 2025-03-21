@@ -39,9 +39,20 @@
 import type { FormSubmitEvent } from '@primevue/forms/form'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
+import { AuthRole } from '~/auth/types'
 
 const toast = useToast()
 const loading = ref(false)
+
+definePageMeta({
+  middleware: async (to, from) => {
+    const { state } = useAuth()
+
+    if (state.data.value?.role !== AuthRole.CHANNEL_STREAMER) {
+      return navigateTo('/')
+    }
+  },
+})
 
 const changePasswordResolver = ref(
   zodResolver(
