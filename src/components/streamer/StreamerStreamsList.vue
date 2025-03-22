@@ -2,7 +2,7 @@
   <Listbox :model-value="modelValue" :options="streams ?? []" filter :filter-fields="['title']" filter-placeholder="Поиск стрима" @update:model-value="emits('update:modelValue', $event)">
     <template #header>
       <div class="flex justify-between items-center">
-        <span class="text-lg">Стримы</span>
+        <span class="text-lg">Стримы {{ streams?.length ? `(${streams?.length})` : '' }}</span>
         <Button text :loading="loadingStreamsStatus === 'pending'" @click="refreshStreams()">
           <template #icon>
             <Icon name="prime:refresh" />

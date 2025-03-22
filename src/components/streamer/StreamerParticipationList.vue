@@ -2,7 +2,7 @@
   <Listbox :options="participations ?? []" filter :filter-fields="['viewer.username']" filter-placeholder="Поиск участника" :highlightOnSelect="false" :virtualScrollerOptions="{ itemSize: 56 }">
     <template #header>
       <div class="flex justify-between items-center">
-        <span class="text-lg">Участники стрима</span>
+        <span class="text-lg">Участники стрима {{ participations?.length ? `(${participations?.length})` : '' }}</span>
         <Button text :loading="loadingParticipationsStatus === 'pending'" @click="refreshParticipations()">
           <template #icon>
             <Icon name="prime:refresh" />
