@@ -2,20 +2,23 @@
   <header class="flex items-center justify-end p-4">
     <transition name="transition-fade" mode="out-in">
       <div v-if="state.status.value === 'authenticated'" class="flex flex-1 justify-between">
-        <Chip>
-          <Icon name="prime:user" size="1.25rem" />
+        <div class="flex gap-2">
           <NuxtLink to="/">
-            <span>{{ state.data.value?.username }}</span>
+            <Chip>
+              <Icon name="prime:user" size="1.25rem" />
+              <span>{{ state.data.value?.username }}</span>
+            </Chip>
           </NuxtLink>
           <NuxtLink v-if="state.data.value?.role === AuthRole.CHANNEL_STREAMER" to="/channel" class="flex">
-            <Button text rounded class="p-0" style="width: 24px; height: 24px">
+            <Button severity="secondary" rounded>
               <template #icon>
                 <Icon name="prime:cog" size="1.25rem" />
               </template>
             </Button>
           </NuxtLink>
-        </Chip>
-        <Button text label="Выйти" @click="logout({ redirectTo: '/auth' })">
+        </div>
+
+        <Button text rounded label="Выйти" @click="logout({ redirectTo: '/auth' })">
           <template #icon>
             <Icon name="prime:sign-out" />
           </template>
