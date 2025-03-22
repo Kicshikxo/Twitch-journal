@@ -2,7 +2,7 @@
   <header class="flex items-center justify-end p-4 gap-1">
     <transition name="transition-fade" mode="out-in">
       <div v-if="state.status.value === 'authenticated'" class="flex flex-1 justify-between">
-        <div class="flex gap-2">
+        <div class="flex gap-1">
           <NuxtLink to="/">
             <Chip>
               <Icon name="prime:user" size="1.25rem" />
