@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
   const viewer = await prisma.viewer.upsert({
     where: { username },
     create: { username },
-    update: {},
+    update: { updatedAt: new Date() },
     select: { id: true },
   })
 
