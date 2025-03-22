@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-4 w-full">
     <StreamerStreamsList v-model="selectedStream" />
-    <StreamerParticipationList :stream="selectedStream" />
+    <StreamerParticipationsList :stream="selectedStream" />
   </div>
 </template>
 

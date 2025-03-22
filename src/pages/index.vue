@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-1 flex-col items-center gap-4">
+  <div class="flex flex-1">
     <StreamerIndexView v-if="state.data.value?.role === AuthRole.CHANNEL_STREAMER" />
     <ViewerIndexView v-if="state.data.value?.role === AuthRole.CHANNEL_VIEWER" />
   </div>
