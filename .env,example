@@ -1,0 +1,9 @@
+DATABASE_URL="postgresql://<username>:<password>@<host>:5432/<dbname>?schema=public"
+
+JWT_SECRET_KEY="<jwt_secret_key>"
+
+AUTH_COOKIE_NAME="twitch-journal__auth-token"
+COLOR_MODE_COOKIE_NAME="twitch-journal__color-mode"
+
+TWITCH_CLIENT_ID="<twitch_client_id>"
+TWITCH_ACCESS_TOKEN="<twitch_access_token>"

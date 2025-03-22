@@ -60,6 +60,14 @@ import { z } from 'zod'
 
 definePageMeta({
   auth: false,
+
+  middleware: async (to, from) => {
+    const { state } = useAuth()
+
+    if (state.status.value === 'authenticated') {
+      return navigateTo('/')
+    }
+  },
 })
 
 const { loginAsStreamer, loginAsViewer } = useAuth()
