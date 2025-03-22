@@ -18,7 +18,7 @@
           </NuxtLink>
         </div>
 
-        <Button text label="Выйти" @click="logout({ redirectTo: '/auth' })">
+        <Button text label="Выйти" :loading="logoutLoading" @click="handleLogout">
           <template #icon>
             <Icon name="prime:sign-out" />
           </template>
@@ -34,4 +34,14 @@
 import { AuthRole } from '~/auth/types'
 
 const { state, logout } = useAuth()
+
+const logoutLoading = ref(false)
+
+const handleLogout = async () => {
+  logoutLoading.value = true
+
+  await logout({ redirectTo: '/auth' })
+
+  logoutLoading.value = false
+}
 </script>
