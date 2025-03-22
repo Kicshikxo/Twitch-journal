@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-end p-4">
+  <header class="flex items-center justify-end p-4 gap-1">
     <transition name="transition-fade" mode="out-in">
       <div v-if="state.status.value === 'authenticated'" class="flex flex-1 justify-between">
         <div class="flex gap-2">
@@ -18,7 +18,7 @@
           </NuxtLink>
         </div>
 
-        <Button text rounded label="Выйти" @click="logout({ redirectTo: '/auth' })">
+        <Button text label="Выйти" @click="logout({ redirectTo: '/auth' })">
           <template #icon>
             <Icon name="prime:sign-out" />
           </template>

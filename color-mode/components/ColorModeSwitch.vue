@@ -1,5 +1,5 @@
 <template>
-  <Button text rounded @click="toggleColorMode">
+  <Button text @click="toggleColorMode">
     <template #icon>
       <ClientOnly>
         <Icon :name="iconName" />
