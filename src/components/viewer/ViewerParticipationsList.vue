@@ -14,7 +14,7 @@
         <span class="text-lg">Участия в стримах {{ participations?.length ? `(${participations?.length})` : '' }}</span>
         <Button text :loading="loadingParticipationsStatus === 'pending'" @click="refreshParticipations()">
           <template #icon>
-            <Icon name="prime:refresh" />
+            <Icon name="prime:refresh" size="1.25rem" />
           </template>
         </Button>
       </div>

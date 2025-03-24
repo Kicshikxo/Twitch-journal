@@ -10,7 +10,7 @@
     <NuxtLink v-if="error.statusCode === 404" to="/">
       <Button label="На главную">
         <template #icon>
-          <Icon name="prime:home" />
+          <Icon name="prime:home" size="1.25rem" />
         </template>
       </Button>
     </NuxtLink>

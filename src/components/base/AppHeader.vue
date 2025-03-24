@@ -20,7 +20,7 @@
 
         <Button text label="Выйти" :loading="logoutLoading" @click="handleLogout">
           <template #icon>
-            <Icon name="prime:sign-out" />
+            <Icon name="prime:sign-out" size="1.25rem" />
           </template>
         </Button>
       </div>

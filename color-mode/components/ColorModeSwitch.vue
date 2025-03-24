@@ -2,7 +2,7 @@
   <Button text @click="toggleColorMode">
     <template #icon>
       <ClientOnly>
-        <Icon :name="iconName" />
+        <Icon :name="iconName" size="1.25rem" />
       </ClientOnly>
     </template>
   </Button>

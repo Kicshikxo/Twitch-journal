@@ -10,7 +10,7 @@
               <div class="flex flex-col gap-1 w-full">
                 <FloatLabel variant="in">
                   <IconField>
-                    <InputIcon><Icon name="prime:user" class="text-xl" /></InputIcon>
+                    <InputIcon><Icon name="prime:user" size="1.25rem" /></InputIcon>
                     <InputText name="username" type="text" class="w-full" />
                   </IconField>
                   <label for="username">Имя пользователя</label>
@@ -26,7 +26,7 @@
               <div class="flex flex-col gap-1 w-full">
                 <FloatLabel variant="in">
                   <IconField>
-                    <InputIcon><Icon name="prime:users" class="text-xl" /></InputIcon>
+                    <InputIcon><Icon name="prime:users" size="1.25rem" /></InputIcon>
                     <InputText name="channel" type="text" class="w-full" />
                   </IconField>
                   <label for="channel">Название канала</label>
@@ -36,7 +36,7 @@
               <div class="flex flex-col gap-1 w-full">
                 <FloatLabel variant="in">
                   <IconField>
-                    <InputIcon><Icon name="prime:lock" class="text-xl" /></InputIcon>
+                    <InputIcon><Icon name="prime:lock" size="1.25rem" /></InputIcon>
                     <Password name="password" toggleMask :feedback="false" fluid class="w-full" />
                   </IconField>
                   <label for="password">Пароль</label>

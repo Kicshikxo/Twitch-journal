@@ -5,7 +5,7 @@
         <span class="text-lg">Стримы {{ streams?.length ? `(${streams?.length})` : '' }}</span>
         <Button text :loading="loadingStreamsStatus === 'pending'" @click="refreshStreams()">
           <template #icon>
-            <Icon name="prime:refresh" />
+            <Icon name="prime:refresh" size="1.25rem" />
           </template>
         </Button>
       </div>
