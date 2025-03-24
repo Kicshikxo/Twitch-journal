@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-1 flex-col gap-4 w-full">
-    <Panel toggleable :collapsed="streamsPanelCollapsed" :pt="{ content: { style: 'padding: 0' } }" @update:collapsed="streamsPanelCollapsed = $event">
+    <Panel :toggleable="!!selectedStream" :collapsed="streamsPanelCollapsed" :pt="{ header: { style: 'height: 52px; padding: 0.375rem 1.125rem' }, content: { style: 'padding: 0' } }" @update:collapsed="streamsPanelCollapsed = $event">
       <template #header>
         <div v-if="selectedStream" class="flex items-center gap-2">
           <span>{{ selectedStream.title }}</span>
@@ -14,7 +14,7 @@
       <StreamerStreamsList v-model="selectedStream" />
     </Panel>
     <transition name="transition-fade" mode="out-in">
-      <StreamerParticipationsList v-show="selectedStream && streamsPanelCollapsed" :stream="selectedStream" />
+      <StreamerParticipationsList v-show="!!selectedStream && streamsPanelCollapsed" :stream="selectedStream" />
     </transition>
   </div>
 </template>
