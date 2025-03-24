@@ -16,7 +16,7 @@
           <span>{{ option.stream.channel.name }} - {{ option.stream.title }}</span>
         </Chip>
         <div class="flex items-center gap-2">
-          <Chip v-if="option.assessment" class="h-[32px]">
+          <Chip v-if="option.assessment && option.assessment !== 'NONE'" class="h-[32px]">
             <Rating :model-value="assessments.indexOf(option.assessment) + 1" readonly />
           </Chip>
           <Chip class="h-[32px]">
