@@ -6,7 +6,7 @@
           <span>{{ selectedStream.title }}</span>
           <Chip class="h-[32px]">
             <span>{{ new Date(selectedStream.createdAt).toLocaleString('ru-RU') }}</span>
-            <Icon name="prime:calendar" size="1.25rem" />
+            <Icon name="prime:clock" size="1.25rem" />
           </Chip>
         </div>
         <span v-else>Выбор стрима</span>
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Panel } from '#components'
 import type { Stream } from '@prisma/client'
 
 const selectedStream = ref<Stream | undefined>()

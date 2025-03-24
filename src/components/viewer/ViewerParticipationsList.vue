@@ -34,7 +34,7 @@
           </Chip>
           <Chip class="h-[32px]">
             <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
-            <Icon name="prime:calendar" size="1.25rem" />
+            <Icon name="prime:clock" size="1.25rem" />
           </Chip>
         </div>
       </div>
