@@ -8,7 +8,7 @@
     "db:push": "prisma db push",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "postinstall": "npm run db:generate && npx nuxt prepare",
+    "postinstall": "prisma generate && nuxt prepare",
     "preview": "nuxt preview"
   },
   "dependencies": {
