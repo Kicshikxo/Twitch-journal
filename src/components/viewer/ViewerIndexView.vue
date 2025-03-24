@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="flex flex-1 w-full">
     <ViewerParticipationsList />
   </div>
 </template>

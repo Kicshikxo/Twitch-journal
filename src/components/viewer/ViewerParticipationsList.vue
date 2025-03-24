@@ -1,5 +1,14 @@
 <template>
-  <Listbox :options="participations ?? []" filter :filter-fields="['stream.channel.name', 'stream.title']" filter-placeholder="Поиск стрима" :highlightOnSelect="false">
+  <Listbox
+    :options="participations ?? []"
+    filter
+    :filter-fields="['stream.channel.name', 'stream.title']"
+    filter-placeholder="Поиск стрима"
+    listStyle="height: 100%"
+    class="flex flex-1 flex-col"
+    :highlightOnSelect="false"
+    :virtualScrollerOptions="{ itemSize: 56 }"
+  >
     <template #header>
       <div class="flex justify-between items-center">
         <span class="text-lg">Участия в стримах {{ participations?.length ? `(${participations?.length})` : '' }}</span>
@@ -21,10 +30,11 @@
           </Chip>
           <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>
-            <Icon name="prime:comments" class="text-lg" />
+            <Icon name="prime:comments" size="1.25rem" />
           </Chip>
           <Chip class="h-[32px]">
             <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
+            <Icon name="prime:calendar" size="1.25rem" />
           </Chip>
         </div>
       </div>

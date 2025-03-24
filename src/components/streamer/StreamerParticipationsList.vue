@@ -1,5 +1,5 @@
 <template>
-  <Listbox :options="participations ?? []" filter :filter-fields="['viewer.username']" filter-placeholder="Поиск участника" :highlightOnSelect="false" :virtualScrollerOptions="{ itemSize: 56 }">
+  <Listbox :options="participations ?? []" filter :filter-fields="['viewer.username']" filter-placeholder="Поиск участника" listStyle="height: 100%" class="flex flex-1 flex-col" :highlightOnSelect="false" :virtualScrollerOptions="{ itemSize: 56 }">
     <template #header>
       <div class="flex justify-between items-center">
         <span class="text-lg">Участники стрима {{ participations?.length ? `(${participations?.length})` : '' }}</span>
@@ -13,6 +13,7 @@
     <template #option="{ option }">
       <div class="flex justify-between items-center w-full">
         <Chip>
+          <Icon name="prime:user" size="1.25rem" />
           <span>{{ option.viewer.username }}</span>
         </Chip>
         <div class="flex items-center gap-2">
@@ -21,7 +22,7 @@
           </Chip>
           <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>
-            <Icon name="prime:comments" class="text-lg" />
+            <Icon name="prime:comments" size="1.25rem" />
           </Chip>
         </div>
       </div>
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Assessment, type Stream } from '@prisma/client';
+import { Assessment, type Stream } from '@prisma/client'
 
 const props = defineProps<{ stream?: Stream }>()
 
