@@ -14,7 +14,7 @@
       <StreamerStreamsList v-model="selectedStream" />
     </Panel>
     <transition name="transition-fade" mode="out-in">
-      <StreamerParticipationsList v-if="selectedStream" :stream="selectedStream" />
+      <StreamerParticipationsList v-show="selectedStream && streamsPanelCollapsed" :stream="selectedStream" />
     </transition>
   </div>
 </template>

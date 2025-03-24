@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.stream.findMany({
     where: { channel: { name: tokenData.channel } },
+    include: { _count: { select: { participations: true } } },
     orderBy: { createdAt: 'desc' },
   })
 })

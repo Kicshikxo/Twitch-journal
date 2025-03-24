@@ -1,5 +1,5 @@
 <template>
-  <Listbox :model-value="modelValue" :options="streams ?? []" filter :filter-fields="['title']" filter-placeholder="Поиск стрима" @update:model-value="emits('update:modelValue', $event)">
+  <Listbox :model-value="modelValue" :options="streams ?? []" filter :filter-fields="['title']" filter-placeholder="Поиск стрима" listStyle="height: 300px" :virtualScrollerOptions="{ itemSize: 56 }" @update:model-value="emits('update:modelValue', $event)">
     <template #header>
       <div class="flex justify-between items-center">
         <span class="text-lg">Стримы {{ streams?.length ? `(${streams?.length})` : '' }}</span>
@@ -15,10 +15,16 @@
         <Chip>
           <span>{{ option.title }}</span>
         </Chip>
-        <Chip class="h-[32px]">
-          <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
-          <Icon name="prime:clock" size="1.25rem" />
-        </Chip>
+        <div class="flex items-center gap-2">
+          <Chip class="h-[32px]">
+            <span>{{ option._count.participations }}</span>
+            <Icon name="prime:users" size="1.25rem" />
+          </Chip>
+          <Chip class="h-[32px]">
+            <span>{{ new Date(option.createdAt).toLocaleString('ru-RU') }}</span>
+            <Icon name="prime:clock" size="1.25rem" />
+          </Chip>
+        </div>
       </div>
     </template>
   </Listbox>
