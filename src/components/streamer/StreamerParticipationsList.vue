@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { Assessment, type Stream } from '@prisma/client'
+import { Assessment, type Stream } from '@prisma/client';
 
 const props = defineProps<{ stream?: Stream }>()
 
@@ -55,6 +55,7 @@ const updateViewerAssessment = async (participationId: string, viewerId: string,
       method: 'post',
       body: { participationId, viewerId, assessment: assessment ?? 'NONE' },
     })
+    refreshParticipations()
   } catch (error: any) {
     toast.add({ severity: 'error', summary: error.statusMessage, life: 3000 })
   } finally {
