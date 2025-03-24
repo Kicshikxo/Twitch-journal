@@ -2,7 +2,9 @@
   <Button text @click="toggleColorMode">
     <template #icon>
       <ClientOnly>
-        <Icon :name="iconName" size="1.25rem" />
+        <Transition name="transition-fade" mode="out-in">
+          <Icon :key="iconName" :name="iconName" size="1.25rem" />
+        </Transition>
       </ClientOnly>
     </template>
   </Button>
