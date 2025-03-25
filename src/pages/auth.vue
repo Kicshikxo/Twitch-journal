@@ -101,13 +101,13 @@ const viewerSubmit = async ({ valid, values }: FormSubmitEvent) => {
 
   loading.value = true
 
-  const { error } = await loginAsViewer({
+  const { status } = await loginAsViewer({
     username: values.username,
     redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
-  if (error) {
-    toast.add({ severity: 'error', summary: error, life: 3000 })
+  if (status !== 200) {
+    toast.add({ severity: 'error', summary: status === 401 ? 'Зритель не найден' : 'Неизвестная ошибка', life: 3000 })
   }
 
   loading.value = false
@@ -118,14 +118,14 @@ const streamerSubmit = async ({ valid, values }: FormSubmitEvent) => {
 
   loading.value = true
 
-  const { error } = await loginAsStreamer({
+  const { status } = await loginAsStreamer({
     channel: values.channel,
     password: values.password,
     redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
-  if (error) {
-    toast.add({ severity: 'error', summary: error, life: 3000 })
+  if (status !== 200) {
+    toast.add({ severity: 'error', summary: status === 401 ? 'Неверное название канала или пароль' : 'Неизвестная ошибка', life: 3000 })
   }
 
   loading.value = false

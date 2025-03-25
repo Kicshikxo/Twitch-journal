@@ -29,7 +29,7 @@ const loginAsStreamer = async (options: LoginStreamerOptions): Promise<LoginResu
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.statusMessage ?? null,
+      error: error?.message ?? null,
     }
   }
 }
@@ -56,7 +56,7 @@ const loginAsViewer = async (options: LoginViewerOptions): Promise<LoginResult> 
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.statusMessage ?? null,
+      error: error?.message ?? null,
     }
   }
 }
@@ -80,7 +80,7 @@ const logout = async (options?: LogoutOptions): Promise<LogoutResult> => {
   } catch (error: any) {
     return {
       status: error?.statusCode ?? 500,
-      error: error?.statusMessage ?? null,
+      error: error?.message ?? null,
     }
   }
 }
@@ -107,7 +107,7 @@ const getSession = async (): Promise<GetSessionResult> => {
 
     return {
       status: error?.statusCode ?? 500,
-      error: error?.statusMessage ?? null,
+      error: error?.message ?? null,
       data: null,
     }
   }

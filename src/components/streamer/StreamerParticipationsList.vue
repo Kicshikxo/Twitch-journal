@@ -58,7 +58,7 @@ const updateViewerAssessment = async (participationId: string, viewerId: string,
     })
     refreshParticipations()
   } catch (error: any) {
-    toast.add({ severity: 'error', summary: error.statusMessage, life: 3000 })
+    toast.add({ severity: 'error', summary: 'Ошибка обновления оценки', life: 3000 })
   } finally {
     loadingParticipations.value = loadingParticipations.value.filter((id) => id !== participationId)
   }

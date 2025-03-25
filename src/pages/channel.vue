@@ -85,7 +85,7 @@ const changePasswordSubmit = async ({ valid, values, reset }: FormSubmitEvent) =
     toast.add({ severity: 'success', summary: 'Пароль изменён', life: 3000 })
     reset()
   } catch (error: any) {
-    toast.add({ severity: 'error', summary: error.statusMessage, life: 3000 })
+    toast.add({ severity: 'error', summary: 'Ошибка изменения пароля', life: 3000 })
   }
 
   loading.value = false
