@@ -18,11 +18,11 @@
         </Chip>
         <div class="flex items-center gap-2">
           <Chip class="h-[32px]">
-            <Rating :model-value="assessments.indexOf(option.assessment) + 1" :disabled="loadingParticipations.includes(option.id)" @value-change="updateViewerAssessment(option.id, option.viewer.id, assessments[$event - 1])" />
-          </Chip>
-          <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>
             <Icon name="prime:comments" size="1.25rem" />
+          </Chip>
+          <Chip class="h-[32px]">
+            <Rating :model-value="assessments.indexOf(option.assessment) + 1" :disabled="loadingParticipations.includes(option.id)" @value-change="updateViewerAssessment(option.id, option.viewer.id, assessments[$event - 1])" />
           </Chip>
         </div>
       </div>
