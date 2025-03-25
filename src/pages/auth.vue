@@ -107,7 +107,7 @@ const viewerSubmit = async ({ valid, values }: FormSubmitEvent) => {
   })
 
   if (status !== 200) {
-    toast.add({ severity: 'error', summary: status === 401 ? 'Зритель не найден' : 'Неизвестная ошибка', life: 3000 })
+    toast.add({ severity: 'error', summary: status === 401 ? 'Имя пользователя не найдено' : 'Неизвестная ошибка', life: 3000 })
   }
 
   loading.value = false
