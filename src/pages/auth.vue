@@ -102,7 +102,7 @@ const viewerSubmit = async ({ valid, values }: FormSubmitEvent) => {
   loading.value = true
 
   const { status } = await loginAsViewer({
-    username: values.username,
+    username: values.username.trim(),
     redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
@@ -119,8 +119,8 @@ const streamerSubmit = async ({ valid, values }: FormSubmitEvent) => {
   loading.value = true
 
   const { status } = await loginAsStreamer({
-    channel: values.channel,
-    password: values.password,
+    channel: values.channel.trim(),
+    password: values.password.trim(),
     redirectTo: (useRoute().query.redirectTo as string) ?? '/',
   })
 
