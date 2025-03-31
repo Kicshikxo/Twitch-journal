@@ -26,7 +26,14 @@
         </Chip>
         <div class="flex items-center gap-2">
           <Chip v-if="option.assessment && option.assessment !== 'NONE'" class="h-[32px]">
-            <Rating :model-value="assessments.indexOf(option.assessment) + 1" readonly />
+            <Rating :model-value="assessments.indexOf(option.assessment) + 1" readonly>
+              <template #officon>
+                <Icon name="tdesign:banana" class="text-[var(--p-rating-icon-color)] hover:text-[var(--p-primary-color)] transition-colors duration-200"/>
+              </template>
+              <template #onicon>
+                <Icon name="tdesign:banana-filled"  class="text-[var(--p-primary-color)]" />
+              </template>
+            </Rating>
           </Chip>
           <Chip class="h-[32px]">
             <span>{{ option.messagesCount }}</span>

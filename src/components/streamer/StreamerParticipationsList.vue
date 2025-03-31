@@ -22,7 +22,14 @@
             <Icon name="prime:comments" size="1.25rem" />
           </Chip>
           <Chip class="h-[32px]">
-            <Rating :model-value="assessments.indexOf(option.assessment) + 1" :disabled="loadingParticipations.includes(option.id)" @value-change="updateViewerAssessment(option.id, option.viewer.id, assessments[$event - 1])" />
+            <Rating :model-value="assessments.indexOf(option.assessment) + 1" :disabled="loadingParticipations.includes(option.id)" @value-change="updateViewerAssessment(option.id, option.viewer.id, assessments[$event - 1])">
+              <template #officon>
+                <Icon name="tdesign:banana" class="text-[var(--p-rating-icon-color)] hover:text-[var(--p-primary-color)] transition-colors duration-200"/>
+              </template>
+              <template #onicon>
+                <Icon name="tdesign:banana-filled"  class="text-[var(--p-primary-color)]" />
+              </template>
+            </Rating>
           </Chip>
         </div>
       </div>
